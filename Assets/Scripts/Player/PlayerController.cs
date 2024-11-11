@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 moveDir = new Vector3(moveInput.x, 0, moveInput.z).normalized;
 
-        Ray ray = new Ray(new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z), moveDir);
+        Ray ray = new Ray(new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), moveDir);
       
         if (Physics.Raycast(ray, 1.5f, layerMask))
         {
