@@ -6,19 +6,20 @@ public class PlayerController : MonoBehaviour
     float moveDistance = 1f;
     Vector3 moveValue;
 
+    private Animator animator;
+    private static int jump = Animator.StringToHash("Jump");
 
     private Camera _camera;
 
     private void Awake()
     {
         _camera = Camera.main;
+        animator = GetComponentInChildren<Animator>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         Vector2 moveInput = context.ReadValue<Vector2>();
-
-        if (moveInput.magnitude > 1f) return;
 
         if (context.started)
         {
@@ -27,9 +28,10 @@ public class PlayerController : MonoBehaviour
 
         if (context.canceled)
         {
-            Debug.Log(moveInput);
+            animator.SetTrigger(jump);
             transform.position += new Vector3(moveValue.x, 0, moveValue.y);
-            Rotate(moveValue);
+            Rotate(moveValue); 
+
             _camera.transform.position += new Vector3(moveValue.x, 0, moveValue.y);
             moveInput = Vector2.zero;
         }
@@ -37,7 +39,14 @@ public class PlayerController : MonoBehaviour
 
     private void Rotate(Vector3 moveValue)
     {
-        transform.rotation = Quaternion.Euler(0f, moveValue.x * 90f, 0f);
-
+        
+        if (moveValue.y < 0f)
+        {
+            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0f, moveValue.x * 90f, 0f);
+        }
     }
 }
