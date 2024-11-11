@@ -28,8 +28,8 @@ public class PlayerController : MonoBehaviour
 
         if (context.canceled)
         {
-            animator.SetTrigger(jump);
             transform.position += new Vector3(moveValue.x, 0, moveValue.y);
+            animator.SetTrigger(jump);
             Rotate(moveValue); 
 
             _camera.transform.position += new Vector3(moveValue.x, 0, moveValue.y);
