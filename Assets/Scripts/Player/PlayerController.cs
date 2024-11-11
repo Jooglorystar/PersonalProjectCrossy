@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
     private static int jump = Animator.StringToHash("Jump");
+    private static int damage = Animator.StringToHash("Damage");
 
     private Camera _camera;
 
@@ -43,7 +45,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     private void Rotate(Vector3 moveValue)
     {
 
@@ -69,5 +70,19 @@ public class PlayerController : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == LayerMask.NameToLayer("Car"))
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        animator.SetTrigger(damage);
+        Debug.Log("Die");
     }
 }
