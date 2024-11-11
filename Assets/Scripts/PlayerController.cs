@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
 
     private Camera _camera;
 
+    public LayerMask layerMask;
+
     private void Awake()
     {
         _camera = Camera.main;
@@ -23,24 +25,29 @@ public class PlayerController : MonoBehaviour
 
         if (context.started)
         {
-            moveValue = moveInput * moveDistance;
+            moveValue = new Vector3(moveInput.x, 0, moveInput.y) * moveDistance;
         }
 
         if (context.canceled)
         {
-            transform.position += new Vector3(moveValue.x, 0, moveValue.y);
-            animator.SetTrigger(jump);
-            Rotate(moveValue); 
+            Rotate(moveValue);
+            if (!IsBlock(moveValue))
+            {
+                transform.position += moveValue;
+                _camera.transform.position += moveValue;
 
-            _camera.transform.position += new Vector3(moveValue.x, 0, moveValue.y);
+            }
+            //animator.SetTrigger(jump);
+
             moveInput = Vector2.zero;
         }
     }
 
+
     private void Rotate(Vector3 moveValue)
     {
-        
-        if (moveValue.y < 0f)
+
+        if (moveValue.z < 0f)
         {
             transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
@@ -48,5 +55,19 @@ public class PlayerController : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0f, moveValue.x * 90f, 0f);
         }
+    }
+
+    private bool IsBlock(Vector3 moveInput)
+    {
+        Vector3 moveDir = new Vector3(moveInput.x, 0, moveInput.z);
+
+        Ray ray = new Ray(new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z), moveDir);
+      
+        if (Physics.Raycast(ray, 1.5f, layerMask))
+        {
+            Debug.Log("is blocked");
+            return true;
+        }
+        return false;
     }
 }
