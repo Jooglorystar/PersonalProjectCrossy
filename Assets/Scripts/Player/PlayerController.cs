@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -53,6 +52,8 @@ public class PlayerController : MonoBehaviour
     private void Move(Vector2 moveInput)
     {
         Rotate(moveValue);
+
+        // 장애물이 없을 때만 이동함
         if (!IsBlock(moveValue))
         {
             if (moveAnimationCoroutine != null) return;
@@ -60,6 +61,7 @@ public class PlayerController : MonoBehaviour
             coin.CollectCoin(moveValue);
         }
 
+        // 입력값 초기화
         moveInput = Vector2.zero;
     }
 
@@ -88,6 +90,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // 장애물 감지 메서드
     private bool IsBlock(Vector3 moveInput)
     {
         Vector3 moveDir = new Vector3(moveInput.x, 0, moveInput.z).normalized;
@@ -96,7 +99,6 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, 1.5f, layerMask))
         {
-            Debug.Log("is blocked");
             return true;
         }
         return false;
