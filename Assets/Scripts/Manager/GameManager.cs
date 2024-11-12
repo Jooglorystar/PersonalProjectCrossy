@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     {
         SetText(coinText, collectedCoin);
         SetText(timeText, timeScore);
+
         timeScoreCoroutine = StartCoroutine(DisplayTimeScore());
     }
 
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator DisplayTimeScore()
     {
+        // 게임하는 동안에는 2초에 1씩 점수가 증가
         while(isPlaying)
         {
             yield return new WaitForSeconds(2f);

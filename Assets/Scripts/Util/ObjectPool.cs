@@ -32,6 +32,7 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
+    // 오브젝트 풀에서 생성
     public GameObject SpawnFromPool(string tag)
     {
         if(!PoolDict.ContainsKey(tag)) return null;
@@ -39,6 +40,7 @@ public class ObjectPool : MonoBehaviour
         GameObject obj = PoolDict[tag].poolQueue.Dequeue();
         PoolDict[tag].poolQueue.Enqueue(obj);
         obj.SetActive(true);
+
         return obj;
     }
 }
