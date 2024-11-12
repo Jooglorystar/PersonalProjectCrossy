@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Search;
 using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public LayerMask layerMask;
 
-    // Update is called once per frame
-    void Update()
+    public void CollectCoin(Vector3 moveInput)
     {
-        
+        Vector3 moveDir = new Vector3(moveInput.x, 0, moveInput.z).normalized;
+
+        Ray ray = new Ray(new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), moveDir);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 1f, layerMask))
+        {
+            GameManager.Instance.CollectedCoin++;
+            hit.collider.gameObject.SetActive(false);
+        }
     }
 }

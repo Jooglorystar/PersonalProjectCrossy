@@ -27,7 +27,7 @@ public class CarSpawner : MonoBehaviour
         createdCar.transform.position = transform.position;
         createdCar.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(Random.Range(1f, 2f));
 
         spawnCoroutine = null;
     }

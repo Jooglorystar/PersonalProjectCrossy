@@ -13,12 +13,14 @@ public class PlayerController : MonoBehaviour
     private static int damage = Animator.StringToHash("Damage");
 
     private Camera _camera;
+    private Coin coin;
 
     public LayerMask layerMask;
 
     private void Awake()
     {
         _camera = Camera.main;
+        coin = GetComponent<Coin>();
         animator = GetComponentInChildren<Animator>();
     }
 
@@ -41,9 +43,9 @@ public class PlayerController : MonoBehaviour
             Rotate(moveValue);
             if (!IsBlock(moveValue))
             {
+                coin.CollectCoin(moveValue);
                 transform.position += moveValue;
                 _camera.transform.position += moveValue;
-
             }
             //animator.SetTrigger(jump);
 
@@ -91,7 +93,7 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger(damage);
         Debug.Log("Die");
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
         gameObject.SetActive(false);
     }
 }
