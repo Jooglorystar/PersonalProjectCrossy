@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public PlayerController Player;
 
+    public int CollectedCoin = 0;
+
     private void Awake()
     {
         if(instance == null)

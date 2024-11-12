@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 297982096763386536}
   m_Layer: 0
-  m_Name: TreeWall
+  m_Name: TreeWall3Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
