@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class CarSpawner : MonoBehaviour
 {
-    [SerializeField] private Transform carSpawnPoint;
     [SerializeField] private GameObject carPrefab;
 
     private Coroutine spawnCoroutine;
@@ -23,12 +22,12 @@ public class CarSpawner : MonoBehaviour
 
     private IEnumerator Spawn()
     {
-        GameObject createdCar = Instantiate(carPrefab, carSpawnPoint);
+        GameObject createdCar = Instantiate(carPrefab, transform);
 
-        createdCar.transform.position = carSpawnPoint.position;
-        createdCar.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+        createdCar.transform.position = transform.position;
+        createdCar.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
         spawnCoroutine = null;
     }
