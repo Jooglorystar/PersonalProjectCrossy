@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
         Rotate(moveValue);
         if (!IsBlock(moveValue))
         {
+            if (moveAnimationCoroutine != null) return;
             moveAnimationCoroutine = StartCoroutine(MoveAnimation());
             coin.CollectCoin(moveValue);
         }
