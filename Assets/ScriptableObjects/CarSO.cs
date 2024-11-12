@@ -3,7 +3,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DefaultCarSO", menuName = "CarSO", order = 0)]
 public class CarSO : ScriptableObject
 {
-    public float carSpeed;
-    public float carSize;
+    [Header("Car Speed")]
+    public float maxCarSpeed;
+    public float minCarSpeed;
+
+    [Header("Car Size")]
+    public float maxCarSize;
+    public float minCarSize;
+
+    [Header("Car Color")]
     public Color carColor;
 }

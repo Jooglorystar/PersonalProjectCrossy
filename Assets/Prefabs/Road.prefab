@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carSpawnPoint: {fileID: 1352281300561299340}
-  carPrefab: {fileID: 482952038687383772, guid: 09071acf01e8b89469e6ebbacbd5dddb, type: 3}
+  carPrefab: {fileID: 887518652416147672, guid: 97cf1e670b9866744a8040cecc014758, type: 3}
 --- !u!1 &4684390227453870325
 GameObject:
   m_ObjectHideFlags: 0
