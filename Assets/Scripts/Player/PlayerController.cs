@@ -13,14 +13,14 @@ public class PlayerController : MonoBehaviour
     private static int damage = Animator.StringToHash("Damage");
 
     private Camera _camera;
-    private Coin coin;
+    private CoinCollecting coin;
 
     public LayerMask layerMask;
 
     private void Awake()
     {
         _camera = Camera.main;
-        coin = GetComponent<Coin>();
+        coin = GetComponent<CoinCollecting>();
         animator = GetComponentInChildren<Animator>();
     }
 
