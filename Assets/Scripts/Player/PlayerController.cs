@@ -68,12 +68,15 @@ public class PlayerController : MonoBehaviour
     private IEnumerator MoveAnimation()
     {
         animator.SetTrigger(animatorMove);
+
         if (moveClip) SoundManager.PlayClip(moveClip);
 
         yield return new WaitForSeconds(0.3f);
 
         transform.position += moveValue;
         _camera.transform.position += moveValue;
+
+        
 
         moveAnimationCoroutine = null;
     }
@@ -120,7 +123,7 @@ public class PlayerController : MonoBehaviour
         GameManager.Instance.isPlaying = false;
         if(dieClip) SoundManager.PlayClip(dieClip);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.0f);
 
         gameObject.SetActive(false);
     }

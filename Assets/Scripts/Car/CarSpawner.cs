@@ -30,7 +30,7 @@ public class CarSpawner : MonoBehaviour
         createdCar.transform.rotation = transform.rotation;
 
 
-        yield return new WaitForSeconds(Random.Range(1f, 2f));
+        yield return new WaitForSeconds(Random.Range(2f, 3f));
 
         spawnCoroutine = null;
     }

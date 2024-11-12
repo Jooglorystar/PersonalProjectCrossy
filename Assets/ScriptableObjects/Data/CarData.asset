@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86302b82020eae74f9fbd7c982feb3e3, type: 3}
   m_Name: CarData
   m_EditorClassIdentifier: 
-  maxCarSpeed: 15
+  maxCarSpeed: 10
   minCarSpeed: 20
   maxCarSize: 1
   minCarSize: 0.5
