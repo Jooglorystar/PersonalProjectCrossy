@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -8,13 +9,15 @@ public class PlayerController : MonoBehaviour
     Vector3 moveValue;
 
     private Animator animator;
-    private static int jump = Animator.StringToHash("Jump");
-    private static int damage = Animator.StringToHash("Damage");
+    private static int animatorMove = Animator.StringToHash("Move");
+    private static int animatorDamage = Animator.StringToHash("Damage");
 
     private Camera _camera;
     private CoinCollecting coin;
 
     public LayerMask layerMask;
+
+    private Coroutine moveAnimationCoroutine;
 
     private void Awake()
     {
@@ -41,18 +44,33 @@ public class PlayerController : MonoBehaviour
 
             if (context.canceled)
             {
-                Rotate(moveValue);
-                if (!IsBlock(moveValue))
-                {
-                    coin.CollectCoin(moveValue);
-                    transform.position += moveValue;
-                    _camera.transform.position += moveValue;
-                }
-                //animator.SetTrigger(jump);
-
-                moveInput = Vector2.zero;
+                Move(moveInput);
             }
         }
+    }
+
+    private void Move(Vector2 moveInput)
+    {
+        Rotate(moveValue);
+        if (!IsBlock(moveValue))
+        {
+            moveAnimationCoroutine = StartCoroutine(MoveAnimation());
+            coin.CollectCoin(moveValue);
+        }
+
+        moveInput = Vector2.zero;
+    }
+
+    private IEnumerator MoveAnimation()
+    {
+        animator.SetTrigger(animatorMove);
+
+        yield return new WaitForSeconds(0.3f);
+
+        transform.position += moveValue;
+        _camera.transform.position += moveValue;
+
+        moveAnimationCoroutine = null;
     }
 
     private void Rotate(Vector3 moveValue)
@@ -72,7 +90,7 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDir = new Vector3(moveInput.x, 0, moveInput.z).normalized;
 
         Ray ray = new Ray(new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), moveDir);
-      
+
         if (Physics.Raycast(ray, 1.5f, layerMask))
         {
             Debug.Log("is blocked");
@@ -84,7 +102,7 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // 차와 충돌 시 Die 메서드 호출
-        if(other.gameObject.layer == LayerMask.NameToLayer("Car"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Car"))
         {
             StartCoroutine(Die());
         }
@@ -92,7 +110,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Die()
     {
-        animator.SetTrigger(damage);
+        animator.SetTrigger(animatorDamage);
         Debug.Log("Die");
         GameManager.Instance.isPlaying = false;
 
