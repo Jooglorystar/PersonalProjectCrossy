@@ -1,7 +1,6 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,9 +10,11 @@ public class GameManager : MonoBehaviour
 
 
     public TextMeshProUGUI coinText;
-    public TextMeshProUGUI TimeText;
+    public TextMeshProUGUI timeText;
 
-    public PlayerController Player;
+    public PlayerController player;
+    public ObjectPool objectPool;
+
 
     public int collectedCoin = 0;
     public int timeScore = 0;
@@ -24,21 +25,17 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
+        if(instance == null) instance = this;
+        else Destroy(this);
+
+        objectPool = GetComponent<ObjectPool>();
     }
 
     private void Start()
     {
         SetText(coinText, collectedCoin);
-        SetText(TimeText, timeScore);
-        StartCoroutine(DisplayTimeScore());
+        SetText(timeText, timeScore);
+        timeScoreCoroutine = StartCoroutine(DisplayTimeScore());
     }
 
     public void SetText(TextMeshProUGUI text, int value)
@@ -52,7 +49,7 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(2f);
             timeScore++;
-            SetText(TimeText, timeScore);
+            SetText(timeText, timeScore);
         }
     }
 }

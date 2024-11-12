@@ -1132,11 +1132,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1983253211}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 860, y: 375.5}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -25, y: -125}
   m_SizeDelta: {x: 150, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 1}
 --- !u!114 &1640275405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1501,6 +1501,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2032465394}
   - component: {fileID: 2032465395}
+  - component: {fileID: 2032465396}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1536,10 +1537,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinText: {fileID: 1830475424}
-  TimeText: {fileID: 1640275405}
-  Player: {fileID: 0}
+  timeText: {fileID: 1640275405}
+  player: {fileID: 0}
+  objectPool: {fileID: 0}
   collectedCoin: 0
   timeScore: 0
+  isPlaying: 1
+--- !u!114 &2032465396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2032465393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e3b328d9fdb4eb4e90a23ba3fbb49fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - tag: Car
+    prefab: {fileID: 887518652416147672, guid: 97cf1e670b9866744a8040cecc014758, type: 3}
+    size: 10
 --- !u!1001 &2103484121
 PrefabInstance:
   m_ObjectHideFlags: 0

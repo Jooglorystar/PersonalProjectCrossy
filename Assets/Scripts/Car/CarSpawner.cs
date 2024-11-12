@@ -22,10 +22,13 @@ public class CarSpawner : MonoBehaviour
 
     private IEnumerator Spawn()
     {
-        GameObject createdCar = Instantiate(carPrefab, transform);
+        // GameObject createdCar = Instantiate(carPrefab, transform);
+        GameObject createdCar = GameManager.Instance.objectPool.SpawnFromPool("Car");
 
         createdCar.transform.position = transform.position;
-        createdCar.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+        //createdCar.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+        createdCar.transform.rotation = transform.rotation;
+
 
         yield return new WaitForSeconds(Random.Range(1f, 2f));
 

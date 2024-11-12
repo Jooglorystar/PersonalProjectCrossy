@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -26,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.Player = this;
+        GameManager.Instance.player = this;
     }
 
     public void OnMove(InputAction.CallbackContext context)

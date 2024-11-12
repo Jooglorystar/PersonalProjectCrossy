@@ -15,20 +15,21 @@ public class CarController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
+    private void OnEnable()
+    {
+        Material material = carData.carMaterials[Random.Range(0, carData.carMaterials.Length)];
+        Material[] materials = _bodyMeshRenderer.materials;
+        materials[0] = material;
+        _bodyMeshRenderer.materials = materials;
+        // _bodyMeshRenderer.materials[0] = material;
+    }
+
     private void Start()
     {
         carSpeed = Random.Range(carData.minCarSpeed, carData.maxCarSpeed);
         carSize = Random.Range(carData.minCarSize, carData.maxCarSize);
 
         gameObject.transform.localScale = new Vector3(carSize, carSize, carSize);
-
-        Material material = carData.carMaterials[Random.Range(0, carData.carMaterials.Length)];
-        Material[] materials = _bodyMeshRenderer.materials;
-        materials[0] = material;
-        _bodyMeshRenderer.materials = materials;
-
-        
-        // _bodyMeshRenderer.materials[0] = material;
     }
 
     private void LateUpdate()
@@ -40,7 +41,7 @@ public class CarController : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("CarRemover"))
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
