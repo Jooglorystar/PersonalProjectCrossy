@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -81,13 +82,16 @@ public class PlayerController : MonoBehaviour
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("Car"))
         {
-            Die();
+            StartCoroutine(Die());
         }
     }
 
-    private void Die()
+    private IEnumerator Die()
     {
         animator.SetTrigger(damage);
         Debug.Log("Die");
+
+        yield return new WaitForSeconds(2f);
+        gameObject.SetActive(false);
     }
 }
