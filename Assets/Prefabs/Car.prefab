@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carData: {fileID: 11400000, guid: bcc853e7afdf967469828e84cdcd3aee, type: 2}
+  _bodyMeshRenderer: {fileID: 55970855514506218}
 --- !u!1 &1858161166898323705
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,7 +494,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7e839a9411bd06241b78b3e681df6a9f, type: 2}
+  - {fileID: 2100000, guid: a4ec143b30ffaed49b5af8e287d0ace7, type: 2}
   - {fileID: 2100000, guid: dcc4d1446ac4b6247b4efd43603c13f6, type: 2}
   - {fileID: 2100000, guid: bab821880557a6440bf93941ccfaa3a6, type: 2}
   m_StaticBatchInfo:

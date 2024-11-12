@@ -12,5 +12,5 @@ public class CarSO : ScriptableObject
     public float minCarSize;
 
     [Header("Car Color")]
-    public Color carColor;
+    public Material[] carMaterials;
 }

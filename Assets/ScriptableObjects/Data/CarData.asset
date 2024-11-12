@@ -16,4 +16,9 @@ MonoBehaviour:
   minCarSpeed: 20
   maxCarSize: 1
   minCarSize: 0.5
-  carColor: {r: 0, g: 0, b: 0, a: 0}
+  carMaterials:
+  - {fileID: 2100000, guid: a4ec143b30ffaed49b5af8e287d0ace7, type: 2}
+  - {fileID: 2100000, guid: df9bd11371429aa4fba5bb5b53e20ab7, type: 2}
+  - {fileID: 2100000, guid: 1221859270504cc4eb8726f104a161d0, type: 2}
+  - {fileID: 2100000, guid: 0b850b030436e4542b86be491cbf06c2, type: 2}
+  - {fileID: 2100000, guid: 6f3d81006e5c805448461745c0f179fb, type: 2}
