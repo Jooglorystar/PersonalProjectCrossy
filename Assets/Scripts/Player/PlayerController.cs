@@ -5,20 +5,21 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    float moveDistance = 1f;
-    Vector3 moveValue;
+    private float moveDistance = 1f;
+    private Vector3 moveValue;
+
+    public LayerMask layerMask;
+    private Camera _camera;
+    private CoinCollecting coin;
 
     private Animator animator;
     private static int animatorMove = Animator.StringToHash("Move");
     private static int animatorDamage = Animator.StringToHash("Damage");
-
-    private Camera _camera;
-    private CoinCollecting coin;
-
-    public LayerMask layerMask;
-
     private Coroutine moveAnimationCoroutine;
 
+    [SerializeField] private AudioClip dieClip;
+    [SerializeField] private AudioClip moveClip;
+    
     private void Awake()
     {
         _camera = Camera.main;
@@ -65,6 +66,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator MoveAnimation()
     {
         animator.SetTrigger(animatorMove);
+        if (moveClip) SoundManager.PlayClip(moveClip);
 
         yield return new WaitForSeconds(0.3f);
 
@@ -114,6 +116,7 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger(animatorDamage);
         Debug.Log("Die");
         GameManager.Instance.isPlaying = false;
+        if(dieClip) SoundManager.PlayClip(dieClip);
 
         yield return new WaitForSeconds(1.5f);
 

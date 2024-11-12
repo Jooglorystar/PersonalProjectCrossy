@@ -4,6 +4,7 @@ public class CoinCollecting : MonoBehaviour
 {
     public LayerMask layerMask;
 
+    [SerializeField] private AudioClip coinClip;
     public void CollectCoin(Vector3 moveInput)
     {
         Vector3 moveDir = new Vector3(moveInput.x, 0, moveInput.z).normalized;
@@ -16,6 +17,8 @@ public class CoinCollecting : MonoBehaviour
         {
             GameManager.Instance.collectedCoin++;
             hit.collider.gameObject.SetActive(false);
+
+            if(coinClip) SoundManager.PlayClip(coinClip);
         }
 
         GameManager.Instance.SetText(GameManager.Instance.coinText, GameManager.Instance.collectedCoin);
