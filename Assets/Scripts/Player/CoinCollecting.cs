@@ -11,10 +11,13 @@ public class CoinCollecting : MonoBehaviour
         Ray ray = new Ray(new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), moveDir);
         RaycastHit hit;
 
+        // 앞에 위치하는 것이 Coin인지 판단.
         if (Physics.Raycast(ray, out hit, 1f, layerMask))
         {
-            GameManager.Instance.CollectedCoin++;
+            GameManager.Instance.collectedCoin++;
             hit.collider.gameObject.SetActive(false);
         }
+
+        GameManager.Instance.SetText(GameManager.Instance.coinText, GameManager.Instance.collectedCoin);
     }
 }

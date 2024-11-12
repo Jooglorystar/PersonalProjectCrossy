@@ -27,9 +27,8 @@ public class CarController : MonoBehaviour
         materials[0] = material;
         _bodyMeshRenderer.materials = materials;
 
-        /*
-        _bodyMeshRenderer.materials[0] = material;
-        */
+        
+        // _bodyMeshRenderer.materials[0] = material;
     }
 
     private void LateUpdate()

@@ -31,31 +31,33 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        Vector2 moveInput = context.ReadValue<Vector2>();
-
-        if (context.started)
+        if (GameManager.Instance.isPlaying)
         {
-            moveValue = new Vector3(moveInput.x, 0, moveInput.y) * moveDistance;
-        }
+            Vector2 moveInput = context.ReadValue<Vector2>();
 
-        if (context.canceled)
-        {
-            Rotate(moveValue);
-            if (!IsBlock(moveValue))
+            if (context.started)
             {
-                coin.CollectCoin(moveValue);
-                transform.position += moveValue;
-                _camera.transform.position += moveValue;
+                moveValue = new Vector3(moveInput.x, 0, moveInput.y) * moveDistance;
             }
-            //animator.SetTrigger(jump);
 
-            moveInput = Vector2.zero;
+            if (context.canceled)
+            {
+                Rotate(moveValue);
+                if (!IsBlock(moveValue))
+                {
+                    coin.CollectCoin(moveValue);
+                    transform.position += moveValue;
+                    _camera.transform.position += moveValue;
+                }
+                //animator.SetTrigger(jump);
+
+                moveInput = Vector2.zero;
+            }
         }
     }
 
     private void Rotate(Vector3 moveValue)
     {
-
         if (moveValue.z < 0f)
         {
             transform.rotation = Quaternion.Euler(0f, 180f, 0f);
@@ -82,6 +84,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // 차와 충돌 시 Die 메서드 호출
         if(other.gameObject.layer == LayerMask.NameToLayer("Car"))
         {
             StartCoroutine(Die());
@@ -92,8 +95,10 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetTrigger(damage);
         Debug.Log("Die");
+        GameManager.Instance.isPlaying = false;
 
         yield return new WaitForSeconds(1.5f);
+
         gameObject.SetActive(false);
     }
 }
