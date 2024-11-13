@@ -58,7 +58,6 @@ public class PlayerController : MonoBehaviour
         {
             if (moveAnimationCoroutine != null) return;
             moveAnimationCoroutine = StartCoroutine(MoveAnimation());
-            coin.CollectCoin(moveValue);
         }
 
         // 입력값 초기화
