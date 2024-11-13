@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get { return instance; } }
 
+    public Image gameOverPanel;
 
     public TextMeshProUGUI coinText;
     public TextMeshProUGUI timeText;
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        gameOverPanel.gameObject.SetActive(false);
         SetText(coinText, collectedCoin);
         SetText(timeText, timeScore);
 
@@ -50,6 +53,7 @@ public class GameManager : MonoBehaviour
         while(isPlaying)
         {
             yield return new WaitForSeconds(2f);
+            if (!isPlaying) break;
             timeScore++;
             SetText(timeText, timeScore);
         }

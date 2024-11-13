@@ -121,6 +121,7 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger(animatorDamage);
         Debug.Log("Die");
         GameManager.Instance.isPlaying = false;
+        GameManager.Instance.gameOverPanel.gameObject.SetActive(true);
         if(dieClip) SoundManager.PlayClip(dieClip);
 
         yield return new WaitForSeconds(1.0f);

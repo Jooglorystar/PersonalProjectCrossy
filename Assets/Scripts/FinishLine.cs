@@ -14,8 +14,8 @@ public class FinishLine : MonoBehaviour
         Debug.Log("Ontrigger");
         if(other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player ¡¢√À");
             particle.Play();
+            GameManager.Instance.gameOverPanel.gameObject.SetActive(true);
         }
     }
 }
