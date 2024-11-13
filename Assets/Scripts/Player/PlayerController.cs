@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private static int animatorMove = Animator.StringToHash("Move");
     private static int animatorDamage = Animator.StringToHash("Damage");
-    private Coroutine moveAnimationCoroutine;
 
     [SerializeField] private AudioClip dieClip;
     [SerializeField] private AudioClip moveClip;
@@ -56,28 +55,14 @@ public class PlayerController : MonoBehaviour
         // 장애물이 없을 때만 이동함
         if (!IsBlock(moveValue))
         {
-            if (moveAnimationCoroutine != null) return;
-            moveAnimationCoroutine = StartCoroutine(MoveAnimation());
+            if (moveClip) SoundManager.PlayClip(moveClip);
+            animator.SetTrigger(animatorMove);
+            transform.position += moveValue;
+            _camera.transform.position += moveValue;
         }
 
         // 입력값 초기화
         moveInput = Vector2.zero;
-    }
-
-    private IEnumerator MoveAnimation()
-    {
-        animator.SetTrigger(animatorMove);
-
-        if (moveClip) SoundManager.PlayClip(moveClip);
-
-        yield return new WaitForSeconds(0.3f);
-
-        transform.position += moveValue;
-        _camera.transform.position += moveValue;
-
-        
-
-        moveAnimationCoroutine = null;
     }
 
     private void Rotate(Vector3 moveValue)

@@ -11,7 +11,6 @@ public class FinishLine : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Ontrigger");
         if(other.gameObject.CompareTag("Player"))
         {
             particle.Play();
